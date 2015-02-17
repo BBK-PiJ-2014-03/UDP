@@ -12,14 +12,14 @@ public class ServerTest {
 
 		public static void main(String[] args) {
 			try {
-				ServerSocket server = new ServerSocket(10007);
+				ServerSocket server = new ServerSocket(10010);
 				
 				Socket client = server.accept();
 				
 				DataInputStream is = new DataInputStream(client.getInputStream());
 				DataOutputStream os = new DataOutputStream(client.getOutputStream());
 				
-				os.writeUTF("Hello clients of this server");
+				os.writeUTF("Hello clients of the ServerTest");
 				
 				client.close();
 				
@@ -28,6 +28,7 @@ public class ServerTest {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			
 			
 		}
 }

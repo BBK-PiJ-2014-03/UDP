@@ -1,33 +1,38 @@
-package client;
+package server;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.ServerSocket;
 import java.net.Socket;
 
-
-public class ClientTest {
+public class ServerRecieverClass {
 
 	public static void main(String[] args) {
 		
 		try {
 			
-			Socket client = new Socket("localhost", 10010);
+			ServerSocket server2 = new ServerSocket(10011);
 			
-			DataInputStream is = new DataInputStream(client.getInputStream());
-			DataOutputStream os = new DataOutputStream(client.getOutputStream());
+			Socket client2 = server2.accept();
+			
+			DataInputStream is = new DataInputStream(client2.getInputStream());
 			
 			InputStreamReader isr = new InputStreamReader(is);
 			BufferedReader br = new BufferedReader(isr);
+			
 			System.out.println(br.readLine());
 			
-			client.close();
+			client2.close();
+			
+			server2.close();
+			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 }
