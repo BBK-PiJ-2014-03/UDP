@@ -12,37 +12,49 @@ import java.util.ArrayList;
 
 public class ServerImpl implements Server {
 	
-	private ServerSocket TCPSocket;
+	private final String GROUP = "localhost";
+	private final int PORT = 10000;
+	
+	private ServerSocket serverTCPSocket;
 	private Socket client;
-	private DatagramSocket UDPSocket;
+	private DatagramSocket serverUDPSocket;
 	
 	private ArrayList<Client> clientList;
 
+	
+	public ServerImpl() {
+		
+		try {
+			
+			serverTCPSocket = new ServerSocket(PORT);
+			serverUDPSocket = new DatagramSocket(PORT);
+			
+			clientList = new ArrayList<Client>();
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void main(String[] args) {
 		
 		ServerImpl server = new ServerImpl();
 		
-		server.run();
+		server.start();
 		
 	}
 	
-	private void run() {
+	private void start() {
 		
-		try {
-			
-			TCPSocket = new ServerSocket(10000);
-			client = TCPSocket.accept();
-			
-			
-		} catch (IOException e) {
-			e.printStackTrace();
+		while(true) {
+			clientListener();
 		}
 		
 		
 	}
 	
 	@Override
-	public void clientListener() {
+	public synchronized void clientListener() {
 		
 	}
 
