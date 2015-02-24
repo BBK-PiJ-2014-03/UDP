@@ -26,7 +26,7 @@ public class AudioServerTest {
 			line.open(af);
 			line.start();
 			
-			
+			socket.close();
 		
 		} catch (SocketException e) {
 			e.printStackTrace();
