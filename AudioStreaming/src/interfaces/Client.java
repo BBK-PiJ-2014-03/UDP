@@ -1,6 +1,6 @@
 package interfaces;
 
-public interface Client {
+public interface Client extends Runnable{
 
 	public void connect();
 	
