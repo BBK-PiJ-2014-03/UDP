@@ -9,6 +9,9 @@ import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import client.ClientImpl;
 
 public class ServerImpl implements Server {
 	
@@ -21,6 +24,7 @@ public class ServerImpl implements Server {
 	
 	private ArrayList<Client> clientList;
 
+	private static AtomicInteger uniqueID;
 	
 	public ServerImpl() {
 		
@@ -30,6 +34,8 @@ public class ServerImpl implements Server {
 			serverUDPSocket = new DatagramSocket(PORT);
 			
 			clientList = new ArrayList<Client>();
+			
+			uniqueID = new AtomicInteger();
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -47,20 +53,30 @@ public class ServerImpl implements Server {
 	private void start() {
 		
 		while(true) {
-			clientListener();
+			try {
+				client = serverTCPSocket.accept();
+				Client newclient = new ClientImpl(client, this.getUniqueID());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		
 	}
 	
 	@Override
-	public synchronized void clientListener() {
+	public void clientListener() {
 		
 	}
 
 	@Override
 	public Handler handleClient(Socket socket) {
 		return null;
+	}
+	
+	@Override
+	public synchronized int getUniqueID() {
+		return (int) uniqueID.getAndIncrement();
 	}
 
 }

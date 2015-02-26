@@ -8,4 +8,6 @@ public interface Server {
 	
 	public Handler handleClient(Socket socket);
 	
+	public int getUniqueID();
+	
 }
