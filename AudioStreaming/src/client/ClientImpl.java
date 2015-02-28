@@ -4,8 +4,12 @@ import interfaces.Client;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -14,17 +18,22 @@ public class ClientImpl implements Client {
 
 	private final String GROUP = "localhost";
 	private final int PORT = 10000;
+	private final int BYTELENGTH = 8192;
 	
 	private Socket client;
 	private int ID;
 	private String role;
 	
-	public ClientImpl() {
-		
+	private File sendFile;
+	private File receiveFile;
+	
+	public ClientImpl(File file) {
+		this.sendFile = file;
 	}
 	
 	public static void main(String[] args) {
-		Client newClient = new ClientImpl();
+		// constructs a new Client with the File object passed to the constructor
+		Client newClient = new ClientImpl(new File(args[0]));
 		newClient.run();
 		
 	}
@@ -45,9 +54,35 @@ public class ClientImpl implements Client {
 				DatagramSocket UDPSocket = new DatagramSocket();
 				InetAddress address = client.getInetAddress();
 				UDPSocket.connect(address, PORT);
-				
-				
+				// converts the dataFile to a byte array
+				int fileLength = (int) sendFile.length();
+				FileInputStream fis = new FileInputStream(sendFile);
+				byte[] fileArray = new byte[fileLength];
+				fis.read(fileArray);
+				// sends the fileArray to the server
+				while (UDPSocket.isConnected()) {
+					DatagramPacket sendPacket = new DatagramPacket(fileArray, fileArray.length, address, PORT);
+					UDPSocket.send(sendPacket);
+				}
+				fis.close();
+				UDPSocket.close();
 			}
+			// if the client is a receiver, a datagram socket is created
+			// a DatagramPacket is created to receive the broadcast from the socket
+			else if (role.equals("Receiver")) {
+				DatagramSocket UDPSocket = new DatagramSocket();
+				InetAddress address = client.getInetAddress();
+				UDPSocket.connect(address, PORT);
+				while (UDPSocket.isConnected()) {
+					DatagramPacket response = new DatagramPacket(new byte[BYTELENGTH], BYTELENGTH);
+					UDPSocket.receive(response);
+					// bytes received from the server are written to a File
+					FileOutputStream fos = new FileOutputStream(receiveFile);
+					fos.write(response.getData());
+				}
+				UDPSocket.close();
+			}
+				
 			
 		} catch (IOException e) {
 			e.printStackTrace();
