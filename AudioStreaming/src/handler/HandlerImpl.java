@@ -1,8 +1,20 @@
 package handler;
 
+import interfaces.Client;
 import interfaces.Handler;
 import interfaces.Server;
 
+import java.util.ArrayList;
+
+/**
+ * 
+ * Handler Implementation
+ * 
+ * Manages the Clients of the Server field.
+ * 
+ * @author IAN
+ *
+ */
 public class HandlerImpl implements Handler {
 
 	private Server server;
@@ -11,9 +23,17 @@ public class HandlerImpl implements Handler {
 		this.server = server;
 	}
 	
+	/**
+	 * 
+	 * Run method for the HandlerImpl thread
+	 * 
+	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		while (true) {
+				ArrayList<Client> clientList = server.getClientList();
+				
+		}
 
 	}
 
