@@ -30,6 +30,9 @@ public class ClientImpl implements Client {
 	public ClientImpl(File file) {
 		this.sendFile = file;
 	}
+	public ClientImpl() {
+		
+	}
 	
 	public static void main(String[] args) {
 		// constructs a new Client with the File object passed to the constructor
