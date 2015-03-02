@@ -79,7 +79,7 @@ public class ServerImpl implements Server {
 	 * 
 	 * starts looping and listening for client connections
 	 * enters a synchronized block where the new client is created '
-	 * and the clients unique ID is sent via a DataOutputStream to the client.s
+	 * and the clients unique ID is sent via a DataOutputStream to the client.
 	 * 
 	 */
 	private void start() {
@@ -93,6 +93,7 @@ public class ServerImpl implements Server {
 			try {
 				// loop sets the serverTCPSocket into its accepting state.
 				Socket client = serverTCPSocket.accept();
+				
 				// when a connection is made it enters a synchronised block
 				synchronized (client) {
 					clientID = this.getUniqueID();

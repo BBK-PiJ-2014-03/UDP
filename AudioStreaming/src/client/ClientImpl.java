@@ -14,6 +14,15 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 
+/**
+ * 
+ * Implementation of the Client.
+ * 
+ * Connects to a Server and either sends data to the server or recieves data from the server
+ * 
+ * @author IAN
+ *
+ */
 public class ClientImpl implements Client {
 
 	private final String GROUP = "localhost";
@@ -30,6 +39,11 @@ public class ClientImpl implements Client {
 	public ClientImpl(File file) {
 		this.sendFile = file;
 	}
+	/**
+	 * 
+	 * Empty Constructor
+	 * 
+	 */
 	public ClientImpl() {
 		
 	}
