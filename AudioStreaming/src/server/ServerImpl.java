@@ -127,5 +127,9 @@ public class ServerImpl implements Server {
 	public synchronized int getUniqueID() {
 		return (int) uniqueID.getAndIncrement();
 	}
+	
+	public ArrayList<Client> getClientList() {
+		return clientList;
+	}
 
 }
