@@ -30,8 +30,13 @@ public class HandlerImpl implements Handler {
 	 */
 	@Override
 	public void run() {
+		// loop runs
 		while (true) {
+				// gets the current clients from the Server
 				ArrayList<Client> clientList = server.getClientList();
+				if (clientList[0] = null) {
+					
+				}
 				
 		}
 
