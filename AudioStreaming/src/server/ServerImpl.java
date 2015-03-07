@@ -125,9 +125,13 @@ public class ServerImpl implements Server {
 	public synchronized int getUniqueID() {
 		return (int) uniqueID.getAndIncrement();
 	}
-	
+	@Override
 	public ArrayList<Client> getClientList() {
 		return clientList;
+	}
+	@Override
+	public DatagramSocket getSocket() {
+		return serverUDPSocket;
 	}
 
 }
