@@ -33,6 +33,9 @@ public class ClientImpl implements Client {
 	private int ID;
 	private String role;
 	
+	public static final String SENDER = "Sender";
+	public static final String RECEIVER = "Receiver";
+	
 	private File sendFile;
 	private File receiveFile;
 	
@@ -67,7 +70,7 @@ public class ClientImpl implements Client {
 			this.role = br.readLine();
 			
 			// if statement checks if the user is the Sender
-			if (role.equals("Sender")) {
+			if (role.equals(SENDER)) {
 				DatagramSocket UDPSocket = new DatagramSocket();
 				InetAddress address = client.getInetAddress();
 				UDPSocket.connect(address, PORT);
@@ -86,7 +89,7 @@ public class ClientImpl implements Client {
 			}
 			// if the client is a receiver, a datagram socket is created
 			// a DatagramPacket is created to receive the broadcast from the socket
-			else if (role.equals("Receiver")) {
+			else if (role.equals(RECEIVER)) {
 				DatagramSocket UDPSocket = new DatagramSocket();
 				InetAddress address = client.getInetAddress();
 				UDPSocket.connect(address, PORT);
