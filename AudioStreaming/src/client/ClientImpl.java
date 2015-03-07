@@ -123,6 +123,11 @@ public class ClientImpl implements Client {
 	public String getRole() {
 		return role;
 	}
+	
+	@Override
+	public Socket getSocket() {
+		return client;
+	}
 
 
 }
