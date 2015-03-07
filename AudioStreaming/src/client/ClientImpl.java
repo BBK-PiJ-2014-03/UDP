@@ -107,26 +107,15 @@ public class ClientImpl implements Client {
 		
 
 	}
-
-	@Override
-	public void connect() {
-
-	}
-
+	
 	@Override
 	public int getID() {
 		return ID;
 	}
-
 	@Override
-	public boolean isFirst() {
-		return false;
+	public String getRole() {
+		return role;
 	}
 
-	@Override
-	public void getUDPConnection() {
-		// TODO Auto-generated method stub
-
-	}
 
 }
