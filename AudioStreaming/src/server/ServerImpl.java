@@ -105,13 +105,11 @@ public class ServerImpl implements Server {
 					clientOutput.writeBytes(Integer.toString(clientID));
 					// sends whether or not the client is sender or receiver.
 					if (clientList.size() > 1) {
-						clientOutput.writeBytes("Receiver");
+						clientOutput.writeBytes(ClientImpl.RECEIVER);
 					}
 					else {
-						clientOutput.writeBytes("Sender");
+						clientOutput.writeBytes(ClientImpl.SENDER);
 					}
-					
-					
 				}
 				
 				
