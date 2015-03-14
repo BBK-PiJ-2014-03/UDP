@@ -53,8 +53,12 @@ public class ClientImpl implements Client {
 	
 	public static void main(String[] args) {
 		// constructs a new Client with the File object passed to the constructor
-		Client newClient = new ClientImpl(new File(args[0]));
-		newClient.run();
+		try {
+			Client newClient = new ClientImpl(new File(args[0]));
+			newClient.run();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			System.out.println("Error: no file passed to Client.");
+		}
 		
 	}
 	
