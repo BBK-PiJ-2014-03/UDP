@@ -62,6 +62,14 @@ public class ClientImpl implements Client {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * run() method for ClientImpl threads
+	 * 
+	 * establishes a connection to the server and then either sends or receives data
+	 * 
+	 */
 	@Override
 	public void run() {
 		try {
