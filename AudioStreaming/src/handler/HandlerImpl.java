@@ -8,6 +8,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import server.ServerImpl;
 import client.ClientImpl;
 
 /**
@@ -23,6 +24,13 @@ public class HandlerImpl implements Handler {
 
 	private Server server;
 	
+	/**
+	 * Constructor for the Handler
+	 * handles the clients of the server.
+	 * 
+	 * 
+	 * @param server
+	 */
 	public HandlerImpl(Server server) {
 		this.server = server;
 	}
@@ -72,12 +80,6 @@ public class HandlerImpl implements Handler {
 					}
 				}
 			}
-			
-			// after updating the server's clients
-			// thread then relays audio data from the sender to the receivers
-			
-			
-			
 		}
 
 	}
